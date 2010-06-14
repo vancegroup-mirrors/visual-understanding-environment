@@ -34,7 +34,7 @@ implements org.osid.repository.Repository
 	private String sessionId = null;
 	private RepositoryManager manager = null;
  
-    protected Repository(String displayName, String key, RepositoryManager manager)
+    public Repository(String displayName, String key, RepositoryManager manager)
 		    throws org.osid.repository.RepositoryException
     {
 		this.key = key;

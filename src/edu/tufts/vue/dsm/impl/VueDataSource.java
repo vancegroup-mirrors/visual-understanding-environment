@@ -66,7 +66,9 @@ public class VueDataSource implements edu.tufts.vue.dsm.DataSource
     public VueDataSource() {
 		try {
 			this.factory = VueOsidFactory.getInstance();
-			this.dataSourceId = this.factory.getIdManagerInstance().createId();
+			org.osid.id.IdManager idm = new comet.osidimpl.id.no_persist.IdManager();
+
+			this.dataSourceId =idm.createId(); //this.factory.getIdManagerInstance().createId();
 		} catch (Throwable t) {			
 		}
     }
@@ -313,7 +315,9 @@ public class VueDataSource implements edu.tufts.vue.dsm.DataSource
         return this.osidName;
     }
     
-  
+    public void setOsidName(String name) {
+       this.osidName = name;
+    }
     public String getOsidVersion() {
         return this.osidBindingVersion;
     }
@@ -329,6 +333,7 @@ public class VueDataSource implements edu.tufts.vue.dsm.DataSource
     public String getProviderDisplayName() {
         return this.providerDisplayName;
     }
+    
     
     public void setProviderDisplayName(String providerDisplayName) {
         this.providerDisplayName = providerDisplayName;
@@ -382,6 +387,10 @@ public class VueDataSource implements edu.tufts.vue.dsm.DataSource
     
     public org.osid.shared.Type getRepositoryType() {
         return this.repositoryType;
+    }
+    
+    public void setRepositoryDisplayName(String s) {
+    	this.repositoryDisplayName = s;
     }
     
     public String getRepositoryDisplayName() {
@@ -474,10 +483,12 @@ public class VueDataSource implements edu.tufts.vue.dsm.DataSource
     public void setProviderIdString(String providerIdString) {
         try {
             this.providerIdString = providerIdString;
-            this.providerId = edu.tufts.vue.dsm.impl.VueOsidFactory.getInstance().getIdManagerInstance().getId(providerIdString);
-            if (!setProviderValues()) // must come first
-                return;
-            setRepositoryManager();
+			org.osid.id.IdManager idm = new comet.osidimpl.id.no_persist.IdManager();
+
+            this.providerId = idm.getId(providerIdString);//edu.tufts.vue.dsm.impl.VueOsidFactory.getInstance().getIdManagerInstance().getId(providerIdString);
+         //   if (!setProviderValues()) // must come first
+         //       return;
+       //     setRepositoryManager();
         } catch (Throwable t) {
             Log.error(this + " setProviderIdString " + Util.tags(providerIdString) + " failed;", t);
         }
@@ -486,10 +497,13 @@ public class VueDataSource implements edu.tufts.vue.dsm.DataSource
     
     public void setDataSourceIdString(String dataSourceIdString) {
         try {
-            this.dataSourceId = factory.getIdManagerInstance().getId(dataSourceIdString);
-            if (!setProviderValues()) // must come first
-                return;
-            setRepositoryManager();
+          //  this.dataSourceId = factory.getIdManagerInstance().getId(dataSourceIdString);
+        	org.osid.id.IdManager idm = new comet.osidimpl.id.no_persist.IdManager();
+
+            this.dataSourceId = idm.getId(dataSourceIdString);//edu.tufts.vue.dsm.impl.V
+         //   if (!setProviderValues()) // must come first
+           //     return;
+      //      setRepositoryManager();
 //         } catch (org.osid.provider.ProviderException pe) {
 //             Log.error(this + " setDataSourceIdString; " + pe);
         } catch (Throwable t) {

@@ -24,6 +24,7 @@ import org.osid.*;
 import org.osid.provider.*;
 import org.osid.shared.*;
 
+import tufts.vue.VueApplet;
 import tufts.vue.VueResources;
 
 public class VueOsidFactory
@@ -56,10 +57,14 @@ implements edu.tufts.vue.dsm.OsidFactory
 				throw new org.osid.provider.ProviderException(org.osid.OsidException.CONFIGURATION_ERROR);
 			}
 			try {
+			   
 				providerControlManager = (ProviderControlManager) edu.mit.osidimpl.OsidLoader.getManager("org.osid.provider.ProviderControlManager", 
 																										 "edu.mit.osidimpl.provider.repository",
 																										 osidContext, 
 																										 new Properties());
+				
+				edu.mit.osidimpl.provider.repository.ProviderControlManager pm = new edu.mit.osidimpl.provider.repository.ProviderControlManager();
+				org.osid.provider.ProviderControlManager providerControlManager = pm;//new org.osid.provider.ProviderControlManager();
 				providerInvocationManager = providerControlManager.getProviderInvocationManager();
 				providerLookupManager = providerControlManager.getProviderLookupManager();
 				providerInstallationManager = providerControlManager.getProviderInstallationManager();

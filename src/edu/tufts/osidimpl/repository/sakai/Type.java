@@ -26,7 +26,7 @@ extends org.osid.shared.Type
         super(authority,domain,keyword,description);        
     }
 
-    protected Type(String authority
+    public Type(String authority
                  , String domain
                  , String keyword)
     {

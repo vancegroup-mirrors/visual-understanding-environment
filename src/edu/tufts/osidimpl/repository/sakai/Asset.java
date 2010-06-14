@@ -55,7 +55,7 @@ implements org.osid.repository.Asset
 		this.key = key;
 		try {
 			this.sessionId = Utilities.getSessionId(key);
-			this.assetId = Utilities.getIdManager().getId(assetIdString);
+			this.assetId =  Utilities.getIdManager().getId(assetIdString);
 			this.recordStructureId = RecordStructure.getInstance().getId();
 			if (url != null) {
 				org.osid.repository.Record record = createRecord(this.recordStructureId);

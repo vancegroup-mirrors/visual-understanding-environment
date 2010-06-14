@@ -441,6 +441,7 @@
     <pathelement path="${lib.home}/jxtaid.jar" />
     <pathelement path="${lib.home}/jxtasecurity.jar" />
     <pathelement path="${lib.home}/saaj.jar" />	
+    <pathelement path="${lib.home}/id.jar" />
     <pathelement path="${lib.home}/xalan.jar" />
 
     <pathelement path="${lib.home}/commons-httpclient-2.0.jar" />
@@ -1144,6 +1145,8 @@
   	        <zipfileset src="${vue-core.jar}"/>
   	        <zipgroupfileset dir="${lib.home}" includes="${thirdparty.jarfiles.names}"
   	        	excludes="org/apache/tools/ant/**"/>
+  	  	<zipgroupfileset dir="${lib.home}" includes="${thirdparty.jarfiles.names.extendedFeatures}"
+  	      	  	        	excludes="org/apache/tools/ant/**"/>
   	        <!-- may be able to modify this to exclude README's, .txt files, etc -->
   	    </jar>
   	    <jar jarfile="${vueapplet.jar}"

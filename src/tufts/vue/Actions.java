@@ -3658,6 +3658,21 @@ public class Actions implements VueConstants
                                 
             }
         };
+        public static final Action SakaiSaveAction =
+            new VueAction("Save Map to Sakai") {
+                // todo: listen to map viewer display event to tag
+                // with currently displayed map name
+                boolean undoable() { return false; }
+                public void act() {
+                	   try {
+                           PublisherNoOsid publisher = new PublisherNoOsid();
+                       } catch (Exception ex) {
+                           VueUtil.alert(null, ex.getMessage(), VueResources.getString("publishdatasourceaction.title"));
+                           ex.printStackTrace();
+                           throw new RuntimeException(ex);
+                       }
+               }
+            };
     public static final Action CloseMap =
     new VueAction(VueResources.local("menu.file.close"), keyStroke(KeyEvent.VK_W, COMMAND)) {
         // todo: listen to map viewer display event to tag

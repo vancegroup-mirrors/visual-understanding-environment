@@ -513,6 +513,7 @@ public class VueMenuBar extends javax.swing.JMenuBar
         {
         	fileMenu.add(Actions.SaveCopyToZotero);
         }
+        fileMenu.add(Actions.SakaiSaveAction);
         fileMenu.add(Actions.Revert);
         Actions.Revert.setEnabled(false);
         fileMenu.addSeparator();
@@ -522,7 +523,7 @@ public class VueMenuBar extends javax.swing.JMenuBar
         fileMenu.add(quickImport);
 
         //publishMenu.setEnabled(false);
-        if (!VUE.isApplet())
+      //  if (!VUE.isApplet())
         	fileMenu.add(publishMenu);
         	
         pdfExportMenu = new JMenu(VueResources.getString("menu.windows.exporthandouts"));
@@ -1045,7 +1046,7 @@ public class VueMenuBar extends javax.swing.JMenuBar
         windowMenu.addSeparator();
 //      if (VUE.getContentDock()!= null && !VUE.isApplet()){
             windowMenu.add(createWindowItem(VUE.getContentDock(), KeyEvent.VK_3, VueResources.getString("dockWindow.contentPanel.title")));
-            if (!VUE.isApplet())
+       //     if (!VUE.isApplet())
             	windowMenu.add(Actions.ResourcesAction);
             windowMenu.add(Actions.DatasetsAction);
             windowMenu.add(Actions.OntologiesAction);

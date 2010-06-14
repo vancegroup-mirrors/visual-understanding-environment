@@ -86,9 +86,10 @@ public class SakaiPublisher {
     public static void uploadMap( DataSource dataSource, Object collectionId, LWMap map, int overwrite)
     	throws Exception
     {
-       	Properties dsConfig = dataSource.getConfiguration();
-       	String sessionId = getSessionId(dsConfig);
-       	String hostUrl = getHostUrl( dsConfig );
+       	//Properties dsConfig = dataSource.getConfiguration();
+       	String sessionId = SakaiDemo.sessionId;//getSessionId(dsConfig);
+       	System.out.println("sessionid : " + sessionId);
+       	String hostUrl = "http://vue-dl.tccs.tufts.edu:8180";//getHostUrl( dsConfig );
        	File savedMapFile = saveMapToFile( map );
        	String resourceName = savedMapFile.getName();
        	
@@ -101,7 +102,7 @@ public class SakaiPublisher {
 		String folderName = createFolder( sessionId, hostUrl, collectionId.toString(), makeSakaiFolderFromVueMap( resourceName ) );
         	
         if( savedMapFile.exists() ) {
-        	hostUrl = getHostUrl( dsConfig );
+        	hostUrl ="http://vue-dl.tccs.tufts.edu:8180"; //getHostUrl( dsConfig );
         	// put map in a folder of the same name
 	        uploadObjectToRepository( 
 	        		hostUrl,

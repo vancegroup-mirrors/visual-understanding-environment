@@ -1228,8 +1228,8 @@ public class VUE
         // VUE-879: UrlAuthentication should initialized BEFORE
         // startRepositoryConfiguration.  It will listen for events from VDSM to scan
         // each DataSource as it's configured for any authentication credentials.
-       if (VUE.isApplet())
-    	   return;
+    //   if (VUE.isApplet())
+    //	   return;
     	UrlAuthentication.getInstance();
             
         final VueDataSourceManager VDSM =
@@ -1259,7 +1259,7 @@ public class VUE
         {
         	//SKIP_DR=true;
         	SKIP_SPLASH=true;
-        	SKIP_CAT=true;
+        //	SKIP_CAT=true;
         }
         if (SKIP_DR || SKIP_SPLASH ) {
             splashScreen = null;

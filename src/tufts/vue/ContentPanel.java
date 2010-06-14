@@ -36,10 +36,10 @@ public class ContentPanel extends JPanel {
 
 
 	public ContentPanel(DockWindow dockWindow) {
-		if (!VUE.isApplet()) {
+		//if (!VUE.isApplet()) {
 			resources = new DRBrowser(true, dockWindow);
 			addBrowser(VueResources.getString("dockWindow.contentPanel.resources.title"), resources);
-		}
+		//}
 
 		datasets = new DSBrowser(dockWindow);
 		addBrowser(VueResources.getString("dockWindow.contentPanel.datasets.title"), datasets);
