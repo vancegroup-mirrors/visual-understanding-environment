@@ -185,8 +185,10 @@ public class VueToolPanel extends JPanel
      **/
     public void addTool( VueTool pTool,boolean addToMainToolbar) {
     	// HO 02/07/2012 BEGIN *******
+    	// HO 01/10/2012 BEGIN *********
     	if (pTool == null)
     		return;
+    	// HO 01/10/2012 END **********
     	// HO 02/07/2012 END *********
 	
         if( mTools == null) {

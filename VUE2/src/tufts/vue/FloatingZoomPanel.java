@@ -117,8 +117,10 @@ public class FloatingZoomPanel extends JPanel
      **/
     public void addTool( VueTool pTool) {
     	// HO 04/07/2012 BEGIN *******
+    	// HO 01/10/2012 BEGIN ********
     	if (pTool == null)
     		return;
+    	// HO 01/10/2012 END ******
     	// HO 04/07/2012 END ********
 	
         if( mTools == null) {

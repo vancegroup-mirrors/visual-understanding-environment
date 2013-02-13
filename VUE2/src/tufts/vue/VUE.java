@@ -1265,6 +1265,13 @@ public class VUE
         }
 
         Log.info("main complete");
+        
+        // HO 19/10/2012 BEGIN *****
+        //VueUtil.alert("This is where you would open the file!", "Insert fileopen code here");
+        //File theFile = new File("/Users/helenoliver/BB.vdk");
+        //if (theFile != null)
+        	//OpenAction.displayMap(theFile);
+        // HO 19/10/2012 END *******
     }
 
     private static boolean didDataInit = false;

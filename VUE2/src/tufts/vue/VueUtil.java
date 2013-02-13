@@ -1472,15 +1472,62 @@ public class VueUtil extends tufts.Util
 			// check if the URI is not absolute
 			if (!specURI.isAbsolute()) {
 				// if not, and the source file path ends with the
-				// target path, it's still the same map
+				// target path, it may still be the same map
 				if (strOriginatingFile.endsWith(strTargetSpec)) {
-					bSameMap = true;
+					// HO 01/10/2012 begin *********
+					// or, it could be two different maps
+					// whose names end the same, so compare the filenames
+					if (checkForSameFilename(strOriginatingFile, strTargetSpec))
+					// HO 01/10/2012 END **********
+						bSameMap = true;
 				} 
 			}
 		}
 					
 		return bSameMap;
 	} 
+	
+	// HO 01/10/2012 BEGIN ********
+	/**
+	 * A function to check two filepaths, to see if the filenames are 
+	 * the same.
+	 * Used in the case where one filepath might be relativized while
+	 * the other is not, such that comparing absolute paths won't help.
+	 * @param strSourceFilepath, the relative or absolute path to the source file
+	 * @param strTargetFilepath, the relative or absolute path to the target file
+	 * @return true if the filenames match, false if they don't
+	 * @author Helen Oliver
+	 */
+	private static boolean checkForSameFilename(String strSourceFilepath, String strTargetFilepath) {
+		// input validation
+		if ((strSourceFilepath == null) || (strTargetFilepath == null) || (strSourceFilepath == "") || (strTargetFilepath == ""))
+			return false;
+		
+		// check for different filenames
+		// with the same ending
+		File sourceFile = new File(strSourceFilepath);
+		File targFile = new File(strTargetFilepath);
+		
+		// Filenames for string comparison
+		String strSourceFilename = "";
+		String strTargetFilename = "";
+		
+		if (sourceFile != null)
+			strSourceFilename = sourceFile.getName();
+		
+		if (targFile != null)
+			strTargetFilename = targFile.getName();
+		
+		if ((strSourceFilename != "") && (strTargetFilename != "") && (strSourceFilename.equals(strTargetFilename)))
+			return true;
+		
+		// if we've reached this point we have no match
+		return false;
+				
+	}
+	
+	// HO 01/10/2012 END ********
+	
 	
 	/**
 	 * A function to make sure the slashes in two different Strings

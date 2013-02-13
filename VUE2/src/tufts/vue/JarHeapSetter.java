@@ -154,7 +154,12 @@ public class JarHeapSetter
 	// HO 08/11/2011 BEGIN **********
 	// I couldn't get it to run with 511 but 127 seems to work...
     //private final static int MIN_HEAP = 511; 
+	// HO 11/12/2012 BEGIN *******
+	// hmmm try it with 32
+	// 127 is the 'real' one!
 	private final static int MIN_HEAP = 127; 
+	//private final static int MIN_HEAP = 31; 
+	// HO 11/12/2012 END *******
 	// HO 08/11/2011 END **********
 	// HO 08/11/2011 BEGIN **********
 	// VUE forums suggest that about half the available heap
@@ -169,9 +174,35 @@ public class JarHeapSetter
     // Do we have enough memory already (some VMs and later Java 6 
     // revisions have bigger default heaps based on total machine memory)?
     float heapSizeMegs = (Runtime.getRuntime().maxMemory()/1024)/1024;
+    
+    // HO 11/12/2012 BEGIN *********
+    // this is the dynamic version.
+    // figure out how much physical memory we have
+    // and set the minimum heap size to that divided by 64, or 1gb, whichever is the smaller,
+    // and the maximum heap size to that divided by 4, or 1gb, whichever is the smaller.
+    long physicalMemorySize;
+    float physicalMemorySizeMegs;
+    int minHeapSizeMegs;
+    int maxHeapSizeMegs;
+   try {
+    	com.sun.management.OperatingSystemMXBean os = (com.sun.management.OperatingSystemMXBean)java.lang.management.ManagementFactory.getOperatingSystemMXBean();
+    	physicalMemorySize = os.getTotalPhysicalMemorySize();
+    	physicalMemorySizeMegs = (physicalMemorySize/1024)/1024;
+        minHeapSizeMegs = (int)(physicalMemorySizeMegs / 64) -1;
+        if (minHeapSizeMegs >= 1023)
+        	minHeapSizeMegs = 1023;
+        maxHeapSizeMegs = (int)(physicalMemorySizeMegs / 4) -1;
+        if (maxHeapSizeMegs > 1023)
+        	maxHeapSizeMegs = 1023;        
+    } catch(Exception e) {	// if we can't use com.sun.management (one can't always), just use the constants 
+    	minHeapSizeMegs = MIN_HEAP;
+    	maxHeapSizeMegs = RECOMMENDED_HEAP;
+    }
 
     // Yes so start
-    if (heapSizeMegs > MIN_HEAP) {
+    //if (heapSizeMegs > MIN_HEAP) {
+    if (heapSizeMegs > minHeapSizeMegs) {
+    // HO 11/12/2012 END ***********
     	
     	VUE.main(args);
 
@@ -199,7 +230,19 @@ public class JarHeapSetter
     	   	    		    	
     	// HO 08/11/2011 BEGIN **********
     	String classpath = System.getProperty("java.class.path");
-    	ProcessBuilder pb = new ProcessBuilder("java","-Xmx"+RECOMMENDED_HEAP+"m -Xms"+MIN_HEAP+"m -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=40 -XX:NewSize=100m -XX:MaxNewSize=100m -XX:SurvivorRatio=6 -XX:TargetSurvivorRatio=80 -XX:+CMSClassUnloadingEnabled -XX:+CMSPermGenSweepingEnabled", "-classpath", classpath, "tufts.vue.VUE");
+    	// HO 23/10/2012 BEGIN **********
+    	// dynamic - this is the best so far
+    	//String thatString = "-Xmx"+maxHeapSizeMegs+"m -Xms"+minHeapSizeMegs+"m -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=40 -XX:NewSize=100m -XX:MaxNewSize=100m -XX:SurvivorRatio=6 -XX:TargetSurvivorRatio=80 -XX:+CMSClassUnloadingEnabled -XX:+CMSPermGenSweepingEnabled";
+    	// dynamic, plus sets the survivor ratio - WARNING tuning anything other than the size may actually HURT performance so be careful!!!
+    	//String thatString = "-Xmx"+maxHeapSizeMegs+"m -Xms"+minHeapSizeMegs+"m -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=40 -XX:NewSize=100m -XX:MaxNewSize=100m -XX:SurvivorRatio=10 -XX:TargetSurvivorRatio=90 -XX:+CMSClassUnloadingEnabled -XX:+CMSPermGenSweepingEnabled";
+    	// dynamic, plus sets survivor ration, plus sets tenuring threshold WARNING tuning anything but the heap size may hurt performance!!!
+    	String thatString = "-Xmx"+maxHeapSizeMegs+"m -Xms"+minHeapSizeMegs+"m -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=40 -XX:NewSize=100m -XX:MaxNewSize=100m -XX:SurvivorRatio=10 -XX:TargetSurvivorRatio=90 -XX:MaxTenuringThreshold=30 -XX:+CMSClassUnloadingEnabled -XX:+CMSPermGenSweepingEnabled";
+    	ProcessBuilder pb = new ProcessBuilder("java", thatString, "-classpath", classpath, "tufts.vue.VUE");    	
+    	// the line below is the "real" one!
+    	//ProcessBuilder pb = new ProcessBuilder("java","-Xmx"+RECOMMENDED_HEAP+"m -Xms"+MIN_HEAP+"m -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=40 -XX:NewSize=100m -XX:MaxNewSize=100m -XX:SurvivorRatio=6 -XX:TargetSurvivorRatio=80 -XX:+CMSClassUnloadingEnabled -XX:+CMSPermGenSweepingEnabled", "-classpath", classpath, "tufts.vue.VUE");
+    	// this was a test to see if it's possible to pass in arguments at this point (it is, you will find that the -nosplash argument does work)
+    	// ProcessBuilder pb = new ProcessBuilder("java","-Xmx"+RECOMMENDED_HEAP+"m -Xms"+MIN_HEAP+"m -XX:MinHeapFreeRatio=20 -XX:MaxHeapFreeRatio=40 -XX:NewSize=100m -XX:MaxNewSize=100m -XX:SurvivorRatio=6 -XX:TargetSurvivorRatio=80 -XX:+CMSClassUnloadingEnabled -XX:+CMSPermGenSweepingEnabled", "-classpath", classpath, "tufts.vue.VUE", "-nosplash");
+    	// HO 23/10/2012 END **************
     	// if the minimum heap size is too big, it doesn't even go
     	// in here, so we need this statement for trace
     	Log.info("Doing the heapsetting thing!");

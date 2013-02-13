@@ -79,7 +79,11 @@ public class DEBUG
     //see my note in InspectorPane for more info. -MK
     public static boolean WORK; // work-in-progress
 
+    // HO 01/10/2012 BEGIN ************
+    // setting to true to see if it breaks a livelock...
     public static boolean DR; // digital repository & data sources
+    // public static boolean DR = true; // digital repository & data sources
+    // HO 01/10/2012 END ************
     
     public static boolean META; // generic toggle to use in combination with other flags
     

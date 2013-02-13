@@ -1179,8 +1179,13 @@ public class Images
 
             Log.info("RESUBMIT: " + Util.tags(tasks));
             for (Runnable r : tasks) {
-                //_pool.submit(r); // java 1.6 impl
-                _pool.execute(r); // java 1.5 impl
+            	// HO 11/12/2012 BEGIN ************
+            	// indeed we are using java 1.6
+            	//if (Util.getJavaVersion() >= 1.6)
+            		//_pool.submit(r); // java 1.6 impl
+            	//else
+            		_pool.execute(r); // java 1.5 impl
+                // HO 11/12/2012 END **************
             }
         }
 
@@ -1190,8 +1195,13 @@ public class Images
                 //_deferredTasks.add(r);
                 TaskQueue.queueTask(r);
             } else {
-                // _pool.submit(r); // java 1.6 impl -- (note: creates FutureTask's internally)
-                _pool.execute(r); // java 1.5 impl
+            	// HO 11/12/2012 BEGIN ************
+            	// indeed we are using java 1.6
+            	//if (Util.getJavaVersion() >= 1.6)
+            		//_pool.submit(r); // java 1.6 impl -- (note: creates FutureTask's internally)
+            	//else
+            		_pool.execute(r); // java 1.5 impl
+             // HO 11/12/2012 END ************
             }
         }
 
