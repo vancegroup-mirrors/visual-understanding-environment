@@ -79,7 +79,7 @@ import edu.tufts.vue.preferences.ui.PreferencesDialog;
  * @author Scott Fraize
  * @version March 2004
  * 
- * @author  Helen Oliver, Imperial College London revisions added & initialled 2010-2012
+ * @author  Helen Oliver, Imperial College London revisions added & initialled 2010-2013
  */
 
 public class Actions implements VueConstants

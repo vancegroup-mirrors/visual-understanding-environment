@@ -61,7 +61,7 @@ import org.apache.commons.io.*;
  *
  * @version $Revision: 1.110 $ / $Date: 2010-05-21 18:44:08 $ / $Author: brian $
  * @author Scott Fraize
- * @author Helen Oliver, Imperial College London revisions added & initialled 2010-2012
+ * @author Helen Oliver, Imperial College London revisions added & initialled 2010-2013
  *
  */
 public class VueUtil extends tufts.Util

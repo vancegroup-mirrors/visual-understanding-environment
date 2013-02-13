@@ -103,7 +103,7 @@ import edu.tufts.vue.preferences.implementations.BooleanPreference;
  *
  * @version $Revision: 1.176 $ / $Date: 2010-03-11 21:15:01 $ / $Author: mike $
  * @author Scott Fraize
- * @author  Helen Oliver, Imperial College London revisions added & initialled 2010-2012
+ * @author  Helen Oliver, Imperial College London revisions added & initialled 2010-2013
  */
 public class VueMenuBar extends javax.swing.JMenuBar
     implements java.awt.event.FocusListener

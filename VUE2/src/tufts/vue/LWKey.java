@@ -14,7 +14,7 @@
  */
 
 /**
- * @author  Helen Oliver, Imperial College London revisions added & initialled 2010-2012
+ * @author  Helen Oliver, Imperial College London revisions added & initialled 2010-2013
  */
 
 package tufts.vue;

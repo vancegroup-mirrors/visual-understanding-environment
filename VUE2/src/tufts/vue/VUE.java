@@ -132,7 +132,7 @@ import bsh.Interpreter;
  * we want to see there (including menus, toolbars, etc).
  *
  * @version $Revision: 1.714 $ / $Date: 2010-02-03 19:17:40 $ / $Author: mike $ 
- * @author  Helen Oliver, Imperial College London revisions added & initialled 2010-2012
+ * @author  Helen Oliver, Imperial College London revisions added & initialled 2010-2013
  */
 
 public class VUE
