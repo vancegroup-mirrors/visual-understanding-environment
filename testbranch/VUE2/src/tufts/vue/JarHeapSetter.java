@@ -169,8 +169,8 @@ public class JarHeapSetter
     // Do we have enough memory already (some VMs and later Java 6 
     // revisions have bigger default heaps based on total machine memory)?
     float heapSizeMegs = (Runtime.getRuntime().maxMemory()/1024)/1024;
-
-    // Yes so start
+    VUE.main(args);
+/*    // Yes so start
     if (heapSizeMegs > MIN_HEAP) {
     	
     	VUE.main(args);
@@ -205,7 +205,7 @@ public class JarHeapSetter
     	Log.info("Doing the heapsetting thing!");
     	// HO 08/11/2011 END **********
     	pb.start();
-    }
+    }*/
   }
 
 }

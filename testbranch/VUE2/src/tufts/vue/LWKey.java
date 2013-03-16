@@ -57,6 +57,8 @@ public interface LWKey {
 
     public LWComponent.Key Label = LWComponent.KEY_Label;
     public LWComponent.Key Notes = LWComponent.KEY_Notes;
+    public LWComponent.Key BaseScore = LWComponent.KEY_BaseScore;
+    public LWComponent.Key Score = LWComponent.KEY_Score;
     public LWComponent.Key Collapsed = LWComponent.KEY_Collapsed;
     
     // a handy hack: if we want a "key" type more specific than object, but

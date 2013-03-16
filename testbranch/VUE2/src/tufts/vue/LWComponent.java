@@ -1510,7 +1510,14 @@ public class LWComponent
         @Override public void setValue(LWComponent c, String val) { c.setNotes(val); }
         @Override public String getValue(LWComponent c) { return c.getNotes(); }
     };
-
+    public static final Key KEY_BaseScore = new Key<LWIBISNode,String>("baseScore", KeyType.DATA) {
+        @Override public void setValue(LWIBISNode c, String val) { c.setBaseScore(Double.valueOf(val)); }
+        @Override public String getValue(LWIBISNode c) { return Double.toString(c.getBaseScore()); }
+    };
+    public static final Key KEY_Score = new Key<LWIBISNode,String>("score", KeyType.DATA) {
+        @Override public void setValue(LWIBISNode c, String val) { c.setScore(Double.valueOf(val)); }
+        @Override public String getValue(LWIBISNode c) { return Double.toString(c.getScore()); }
+    };
 
     //===================================================================================================
     //

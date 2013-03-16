@@ -66,6 +66,8 @@ public class InspectorPane extends WidgetStack
 
     private final LabelPane mLabelPane = new LabelPane(); // old style; new SummaryPane()
     private final NotePanel mNotes = new NotePanel("LWNotes");
+    private final BaseScorePanel mBaseScore = new BaseScorePanel("LWBaseScore");
+    private final ScorePanel mScore = new ScorePanel("LWScore");
     private final NotePanel mPathwayNotes = new NotePanel("PathwayNotes", false);
     private final UserMetaData mKeywords = new UserMetaData();
     private final OntologicalMembershipPane ontologicalMetadata = new OntologicalMembershipPane();
@@ -138,6 +140,8 @@ public class InspectorPane extends WidgetStack
         new Pane(VueResources.getString("inspectorpane.contentinfo"),mResourceMetaData,   EXACT_SIZE,  RESOURCE);
         new Pane(VueResources.getString("inspectorpane.contentsummary"),mDescription,        0.5f,        RESOURCE+DATA);
         new Pane(VueResources.getString("nodeNotesTabName"),mNotes,EXACT_SIZE,    INFO+NOTES);
+        new Pane("BaseScore",mBaseScore,EXACT_SIZE,    INFO+NOTES);
+        new Pane("Score",mScore,EXACT_SIZE,    INFO+NOTES);
         new Pane(VueResources.getString("inspectorpane.pathwaynotes"),mPathwayNotes,EXPANDER,INFO+NOTES);
         new Pane(VueResources.getString("jlabel.keyword"),mKeywords,EXACT_SIZE,  KEYWORD);
         new Pane(VueResources.getString("combobox.mergepropertychoices.ontologicalmembership"), ontologicalMetadata, EXACT_SIZE,  0);
@@ -156,6 +160,8 @@ public class InspectorPane extends WidgetStack
         Widget.setHelpAction(mPreview,VueResources.getString("dockWindow.Info.previewPane.helpText"));;
         Widget.setHelpAction(mResourceMetaData,VueResources.getString("dockWindow.Info.resourcePane.helpText"));;
         Widget.setHelpAction(mNotes,VueResources.getString("dockWindow.Info.notesPane.helpText"));;
+        Widget.setHelpAction(mBaseScore,"BaseScore Help");;
+        Widget.setHelpAction(mScore,"Score Help");;
         Widget.setHelpAction(mKeywords,VueResources.getString("dockWindow.Info.userPane.helpText"));;
         Widget.setHelpAction(ontologicalMetadata,VueResources.getString("dockWindow.Info.ontologicalMetadata.helpText"));
 
@@ -1161,6 +1167,8 @@ public class InspectorPane extends WidgetStack
         // todo: should be using setPanesVisible here
         Widget.setHidden(mLabelPane, !visible);        
         Widget.setHidden(mNotes, !visible);
+        Widget.setHidden(mBaseScore, !visible);
+        Widget.setHidden(mScore, !visible);
         Widget.setHidden(mDataSetData, !visible);
 
         Widget.setHidden(mKeywords, !visible);

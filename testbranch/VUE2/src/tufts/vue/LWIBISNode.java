@@ -129,6 +129,72 @@ public class LWIBISNode extends LWNode
     private Class<? extends LWImage> nodeImageClass = null;
     private String mIBISType = null;
     
+    // MR 01/12/2012 BEGIN ******************
+    // these are the attributes that store the argumentation semantics framework variables
+    private int proVotes = 0;	// pro-votes for an argument
+    private int conVotes = 0;	// contra-votes for an argument
+    private double baseScore = 0.5;	// base score for an argument (when not using any kind of social support)
+    private double score = 0;	// computed score for an argument
+    
+	/**
+	 * @return the proVotes
+	 */
+	public int getProVotes() {
+		return proVotes;
+	}
+
+	/**
+	 * @param proVotes the proVotes to set
+	 */
+	public void setProVotes(int proVotes) {
+		this.proVotes = proVotes;
+	}
+
+	/**
+	 * @return the conVotes
+	 */
+	public int getConVotes() {
+		return conVotes;
+	}
+
+	/**
+	 * @param conVotes the conVotes to set
+	 */
+	public void setConVotes(int conVotes) {
+		this.conVotes = conVotes;
+	}
+
+	/**
+	 * @return the score
+	 */
+	public double getScore() {
+		return score;
+	}
+
+	/**
+	 * @param score the score to set
+	 */
+	public void setScore(double score) {
+		this.score = score;
+	    notify(LWKey.Score, 1);
+	}
+	
+	/**
+	 * @return the baseScore
+	 */
+	public double getBaseScore() {
+		return baseScore;
+	}
+
+	/**
+	 * @param baseScore the baseScore to set
+	 */
+	public void setBaseScore(double baseScore) {
+		this.baseScore = baseScore;
+		notify(LWKey.BaseScore, 1);
+	}
+	// MR 01/12/2012 END ******************
+
 	// HO 26/10/2011 BEGIN *********
 	// for the record, the default image size
 	Size defaultIBISSize = new Size(32, 32);

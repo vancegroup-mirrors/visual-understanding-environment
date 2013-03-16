@@ -341,6 +341,12 @@
 		<field name="ibisImage" type="tufts.vue.LWImage">
 			<bind-xml name="ibisImage" node="element"/>
 		</field> 	
+		<field name="baseScore" type="double">
+			<bind-xml name="baseScore" node="element"/>
+		</field> 	
+		<field name="score" type="double">
+			<bind-xml name="score" node="element"/>
+		</field> 	
 	</class>	
 	<!-- HO 17/12/2010 END -->
         

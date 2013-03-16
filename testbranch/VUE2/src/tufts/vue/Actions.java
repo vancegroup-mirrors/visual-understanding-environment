@@ -4696,6 +4696,14 @@ return areLinksFiltered();
         //NewSlide
     };
     
+    // Triggers Argumentation Computation for the selected IBIS node. If multiple nodes are selected the behavior is undefined!
+	public static final LWCAction IBISArgComputeAction = new LWCAction(VueResources.local("menu.content.IBISArgCompute")) {
+		public void act() {
+			Argumentation arg = new Argumentation(VUE.getSelection().first());
+			arg.computeScores();
+		}
+	};
+    
     // HO 01/04/2011 BEGIN ******
     public static final Action[] NEW_IBIS_TYPE_ACTIONS = getNewIBISTypeActions();
     

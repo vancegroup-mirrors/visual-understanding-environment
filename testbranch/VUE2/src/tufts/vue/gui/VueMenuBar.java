@@ -833,6 +833,10 @@ public class VueMenuBar extends javax.swing.JMenuBar
         // Build Content Menu
         ////////////////////////////////////////////////////////////////////////////////////
         GUI.addToMenu(contentMenu, Actions.NEW_OBJECT_ACTIONS);
+        
+		final JMenuItem iBISArgComputeItem = new JMenuItem(Actions.IBISArgComputeAction);
+		contentMenu.add(iBISArgComputeItem).setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_L, metaMask+Event.SHIFT_MASK));
+        
         // HO 01/04/2011 BEGIN **********
         // a menu for adding IBIS nodes
         contentMenu.add(buildMenu("menu.content.addIBISnode", Actions.NEW_IBIS_TYPE_ACTIONS));
